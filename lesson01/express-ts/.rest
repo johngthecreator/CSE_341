@@ -1,0 +1,5 @@
+# GET Request to Retrieve One Document From MongoDB Based on firstName
+POST http://localhost:3000/contacts
+id: <person's first name>
+# GET Request to get all the documents within the 'contacts' 
+POST http://localhost:3000/contacts
