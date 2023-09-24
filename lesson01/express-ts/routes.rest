@@ -1,0 +1,12 @@
+###
+# GET Request to Retrieve 'Shawn' Document From MongoDB
+GET http://localhost:3000/contacts?id=650fada200f533887904375e
+###
+# GET Request to Retrieve 'John' Document From MongoDB
+GET http://localhost:3000/contacts?id=650fac1b00f533887904375c
+###
+# GET Request to Retrieve 'Donald' Document From MongoDB
+GET http://localhost:3000/contacts?id=650fad3300f533887904375d
+###
+# GET All contacts from MongoDB
+GET http://localhost:3000/contacts

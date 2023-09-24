@@ -34,7 +34,7 @@ async function getOne(id:string) {
 
 
 export const contactsController = async (req: Request, res: Response) => {
-    const header = req.headers['id']
+    const header = req.query.id
     if(header){
         try{
             await client.connect();
