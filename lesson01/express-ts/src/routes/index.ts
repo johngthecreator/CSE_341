@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import {indexRoute} from "./indexRoute.js"
+import { indexRoute } from "../controllers/indexRoute.js"
 
 const app: Express = express();
 const port = 3000;

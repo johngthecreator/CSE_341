@@ -1,4 +1,3 @@
-import express, { Express, Request, Response } from 'express';
-export const indexRoute = (req: Request, res: Response) => {
+export const indexRoute = (req: any, res: any) => {
     res.send('John Gorriceta');
-  }
+}
