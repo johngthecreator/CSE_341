@@ -32,25 +32,90 @@ async function getOne(id:string) {
     }
   }
 
+async function addOne(bodyData: any){
+    try {
+      const myDB = client.db("cse-341")
+      const myColl = myDB.collection("contacts");
+      const query = bodyData;
+      const data = await myColl.insertOne(query)
+      return data
+    } finally {
+      await client.close();
+    }
+}
+
+async function updateOne(id:string, bodyData: any) {
+    try {
+      const myDB = client.db("cse-341")
+      const myColl = myDB.collection("contacts");
+      const query = { _id: new ObjectId(id) };
+      const data = await myColl.updateOne(query, {$set:{...bodyData}})
+      return data
+    } finally {
+      await client.close();
+    }
+  }
+
+async function deleteOne(id:string) {
+    const myDB = client.db("cse-341")
+    const myColl = myDB.collection("contacts");
+    const query = { _id: new ObjectId(id) };
+    const data = await myColl.deleteOne(query)
+    return data
+}
+
 
 export const contactsController = async (req: Request, res: Response) => {
+    const method = req.method
+    const body = req.body
     const header = req.query.id
-    if(header){
-        try{
-            await client.connect();
-            let data = await getOne(header)
-            res.json({status:200, data:data});
-        }catch (e){
-            res.json({status:500, message:`Error connecting${e}`});
-        }
+    switch(method){
+      case "GET":
+        if(header){
+            try{
+                await client.connect();
+                let data = await getOne(header)
+                res.json({status:200, data:data});
+            }catch (e){
+                res.json({status:500, message:`Error connecting${e}`});
+            }
 
-    }else{
-        try{
-            await client.connect();
-            let data = await getAll()
-            res.json({status:200, data:data});
-        }catch (e){
-            res.json({status:500, message:`Error connecting${e}`});
+        }else{
+            try{
+                await client.connect();
+                let data = await getAll()
+                res.json({status:200, data:data});
+            }catch (e){
+                res.json({status:500, message:`Error connecting${e}`});
+            }
         }
+        break;
+      case "POST":
+        try{
+          await client.connect();
+          let objId = await addOne(body);
+          res.status(201).json({objectId:objId.insertedId})
+        }catch (e){
+          res.status(500).json({message:`Error inserting${e}`});
+        }
+        break;
+      case "PUT":
+        try{
+          await client.connect();
+          let returnedData = await updateOne(header,body);
+          res.status(204).json({acknowledged:returnedData.acknowledged, modifiedCount: returnedData.modifiedCount})
+        }catch (e){
+          res.status(500).json({message:`Error updating${e}`});
+        }
+        break;
+      case "DELETE":
+        try{
+          await client.connect();
+          let returnedData = await deleteOne(header);
+          res.status(200).json({acknowledged:returnedData.acknowledged, deletedCount: returnedData.deletedCount})
+        }catch (e){
+          res.status(500).json({message:`Error deleteing${e}`});
+        }
+        break;
     }
 }

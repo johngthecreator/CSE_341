@@ -10,3 +10,39 @@ GET http://localhost:3000/contacts?id=650fad3300f533887904375d
 ###
 # GET All contacts from MongoDB
 GET http://localhost:3000/contacts
+
+###
+# DELETE "John Grover" 
+DELETE http://localhost:3000/contacts?id=650fac1b00f533887904375c
+###
+# DELETE "Kylie Jenner"
+DELETE http://localhost:3000/contacts?id=6517a59b373a3dbea4d8e38f
+
+###
+# CREATE "Chicken Little"
+POST http://localhost:3000/contacts
+content-type: application/json 
+{
+    "firstName": "Chicken",
+    "lastName": "Little",
+    "email": "littlechicky@msn.net",
+    "favoriteColor": "gray",
+    "birthday": "7/12/2006"
+}
+###
+# UPDATE Jared Keh's favoriteColor and birthday
+PUT http://localhost:3000/contact?id=650fada200f533887904375e
+content-type: application/json 
+{
+    "favoriteColor": "yellow",
+    "birthday": "11/11/2011"
+}
+
+###
+# UPDATE Helene Keller's favoriteColor and birthday
+PUT http://localhost:3000/contact?id=6517b8c40fc9fc0baa0cf9f7
+content-type: application/json 
+{
+    "favoriteColor": "purple",
+    "birthday": "1/4/1908"
+}

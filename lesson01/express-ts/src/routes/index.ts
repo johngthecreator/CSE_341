@@ -5,8 +5,10 @@ import { contactsController } from '../controllers/contactsController.js';
 const app: Express = express();
 const port = 3000;
 
+app.use(express.json())
+
 app.get('/', indexController);
-app.get('/contacts', contactsController);
+app.all('/contacts', contactsController);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
