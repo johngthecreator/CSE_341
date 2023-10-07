@@ -98,7 +98,7 @@ export const contactsController = async (req, res) => {
             try {
                 await client.connect();
                 let returnedData = await updateOne(header, body);
-                res.status(200).json({ acknowledged: returnedData.acknowledged, modifiedCount: returnedData.modifiedCount });
+                res.status(204).json({ acknowledged: returnedData.acknowledged, modifiedCount: returnedData.modifiedCount });
             }
             catch (e) {
                 res.status(500).json({ message: `Error updating${e}` });
@@ -108,7 +108,7 @@ export const contactsController = async (req, res) => {
             try {
                 await client.connect();
                 let returnedData = await deleteOne(header);
-                res.status(204).json({ acknowledged: returnedData.acknowledged, deletedCount: returnedData.deletedCount });
+                res.status(200).json({ acknowledged: returnedData.acknowledged, deletedCount: returnedData.deletedCount });
             }
             catch (e) {
                 res.status(500).json({ message: `Error deleteing${e}` });
