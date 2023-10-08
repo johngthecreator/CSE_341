@@ -5,7 +5,7 @@
     "title": "Contacts API",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "lesson01-cse-341.onrender.com",
   "basePath": "/contacts",
   "tags": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {},
   "paths": {
